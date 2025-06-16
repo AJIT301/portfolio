@@ -1,0 +1,69 @@
+/*
+.comet-wrapper {
+    position: relative;
+    width: 90vw;
+    max-width: 700px;
+    margin: 0 auto;
+    pointer-events: none;
+}
+
+.comet {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent), 
+                0 0 20px rgba(244, 67, 54, 0.67), 
+                0 0 40px rgba(244, 67, 54, 0.4);
+    offset-rotate: auto;
+    offset-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+    offset-distance: 0%;
+    animation: cometTravel 5s linear infinite;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    z-index: 1;
+}
+
+@keyframes cometTravel {
+    0% {
+        offset-distance: 0%;
+    }
+
+    100% {
+        offset-distance: 100%;
+    }
+}
+
+@keyframes cometMove {
+    0% {
+        top: 0;
+        left: 0;
+        transform: translate(0, 0) rotate(90deg);
+    }
+
+    25% {
+        top: 0;
+        left: 100%;
+        transform: translate(-100%, 0) rotate(0deg);
+    }
+
+    50% {
+        top: 100%;
+        left: 100%;
+        transform: translate(-100%, -100%) rotate(90deg);
+    }
+
+    75% {
+        top: 100%;
+        left: 0;
+        transform: translate(0, -100%) rotate(0deg);
+    }
+
+    100% {
+        top: 0;
+        left: 0;
+        transform: translate(0, 0) rotate(90deg);
+    }
+}
+*/

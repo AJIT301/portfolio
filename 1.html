@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Letter Collision</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let letters = [];
+        let gravity = 0.5;
+
+        function Letter(x, y) {
+            this.x = x;
+            this.y = y;
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 1;
+            this.size = Math.random() * 10 + 20;
+            this.letter = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+        }
+
+        Letter.prototype.update = function () {
+            this.speedY += gravity;      // apply gravity
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            // Bounce off the floor
+            if (this.y > canvas.height - this.size) {
+                this.y = canvas.height - this.size;
+                this.speedY *= -0.9; // reverse and reduce speed for bounce effect
+            }
+
+            // Bounce off left/right walls
+            if (this.x < 0) {
+                this.x = 0;
+                this.speedX *= -1;
+            } else if (this.x > canvas.width - this.size) {
+                this.x = canvas.width - this.size;
+                this.speedX *= -1;
+            }
+        };
+
+        Letter.prototype.draw = function () {
+            ctx.font = `${this.size}px Arial`;
+            ctx.fillStyle = 'black';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            ctx.fillText(this.letter, this.x, this.y);
+        };
+
+        function updateLetters() {
+            for (let i = 0; i < letters.length; i++) {
+                letters[i].update();
+            }
+        }
+
+        function drawLetters() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let letter of letters) {
+                letter.draw();
+            }
+        }
+
+        function randomLetter(x, y) {
+            let letter = new Letter(x, y);
+            letters.push(letter);
+        }
+
+        // Start simulation on window load
+        window.onload = () => {
+            for (let i = 0; i < 10; i++) {
+                randomLetter(Math.random() * canvas.width, Math.random() * canvas.height);
+            }
+            setInterval(() => {
+                updateLetters();
+                drawLetters();
+            }, 32); // ~60 FPS
+        };
+    </script>
+</body>
+</html>
